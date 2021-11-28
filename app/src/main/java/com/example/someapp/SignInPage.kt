@@ -1,5 +1,6 @@
 package com.example.someapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -14,6 +15,8 @@ class SignInPage : AppCompatActivity() {
     lateinit var loginBtn: Button
     lateinit var email: TextView
     lateinit var password: TextView
+
+    lateinit var suggest: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in_page)
@@ -21,6 +24,8 @@ class SignInPage : AppCompatActivity() {
 
         val defaultEmail = "email@example.com"
         val defaultPassword = "somePassword"
+
+        suggest = findViewById(R.id.registrationSuggestion)
 
         welcome = findViewById(R.id.welcomeText)
         welcome.text = intent?.extras?.getString("USERNAME", "HELLO KETI")
@@ -38,6 +43,11 @@ class SignInPage : AppCompatActivity() {
             }else{
                 Toast.makeText(this, "Wrong Email or Password", Toast.LENGTH_LONG).show()
             }
+        }
+
+        suggest.setOnClickListener {
+            val regIntent = Intent(this, MainActivity::class.java)
+            startActivity(regIntent)
         }
 
 
